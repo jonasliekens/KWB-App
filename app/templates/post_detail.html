@@ -1,0 +1,20 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="{{url_for('index')}}">Home</a></li>
+    <li><a href="{{url_for('blog')}}">Blog</a></li>
+    <li class="active">Preview</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="col-xs-4"><h2 class="panel-title">{{post.title}}</h2></div>
+        <div class="col-xs-4 pull-right text-right">{{post.timestamp}}</div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">{{post.body|markdown}}</div>
+</div>
+
+{% endblock %}

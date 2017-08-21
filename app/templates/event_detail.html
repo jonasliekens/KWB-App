@@ -1,0 +1,24 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="{{url_for('index')}}">Home</a></li>
+    <li><a href="{{url_for('events')}}">Events</a></li>
+    <li class="active">Preview</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="col-xs-4"><h2 class="panel-title">{{event.title}}</h2></div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">{{event.description|markdown}}</div>
+    <div class="panel-footer">
+        <div class="col-xs-4"><strong>Starts:</strong> {{event.start}}</div>
+        <div class="col-xs-4 pull-right text-right"><strong>Ends:</strong> {{event.end}}</div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+{% endblock %}

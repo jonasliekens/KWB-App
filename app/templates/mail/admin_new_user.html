@@ -1,0 +1,10 @@
+<p>Dear {{ user.last_name }} {{ user.first_name }}</p>
+<p>An account was created for you for the KWB Admin Web Applistation. You can login <a href="{{url_for('login', _external=True)}}">here</a> with the following credentials:</p>
+<ul>
+    <li>Login: {{user.email}}</li>
+    <li>Password: {{password}}</li>
+</ul>
+<p>Please don't forget to complete your user profile <a href="{{url_for('profile', _external=True)}}">here!</a></p>
+<p>Regards,<br>
+The KWB Website Admin</p>
+<p>(This is an automated email, please do not reply to specific this email)</p>

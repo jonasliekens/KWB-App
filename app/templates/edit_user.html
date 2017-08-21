@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="{{url_for('index')}}">Home</a></li>
+    <li><a href="{{url_for('users')}}">Users</a></li>
+    <li class="active">Edit</li>
+</ol>
+
+<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6">
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <img alt="" class="img-rounded img-responsive" src="{{user.avatar(150)}}">
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                <p>
+                    <i class="glyphicon glyphicon-earphone"></i> {{ user.phone }}
+                    <br>
+                    <i class="glyphicon glyphicon-envelope"></i> {{ user.email }}
+                    <br>
+                    <i class="glyphicon glyphicon-home"></i> {{ user.address }}, {{ user.zipcode }}, {{ user.city }}
+                    <br>
+                    <i class="glyphicon glyphicon-briefcase"></i>
+                    {% for role in user.roles %}
+                    {{role.name}}
+                    {% endfor %}
+                </p>
+
+                <p>
+                    <a href="{{ url_for('index') }}">Edit roles</a> | <a
+                        href="{{ url_for('reset_password', id = user.id) }}">Reset password</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

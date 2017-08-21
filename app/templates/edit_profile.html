@@ -1,0 +1,80 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{{url_for('index')}}">Home</a></li>
+  <li><a href="{{url_for('profile')}}">Profile</a></li>
+  <li class="active">Edit</li>
+</ol>
+
+<div class="well">
+
+    <form action="" method="post" name="edit_profile">
+        {{form.hidden_tag()}}
+
+        <div class="form-group{% if form.errors.first_name %} has-error{% endif %}">
+            <label class="control-label" for="first_name">{{form.first_name.label}}:</label>
+            {{ form.first_name(maxlength = 64, class = "form-control") }}
+            {% for error in form.errors.first_name %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.last_name %} has-error{% endif %}">
+            <label class="control-label" for="last_name">{{form.last_name.label}}:</label>
+            {{ form.last_name(maxlength = 64, class = "form-control") }}
+            {% for error in form.errors.last_name %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.email %} has-error{% endif %}">
+            <label class="control-label" for="email">{{form.email.label}}:</label>
+            {{ form.email(maxlength = 120, class = "form-control") }}
+            {% for error in form.errors.email %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.phone %} has-error{% endif %}">
+            <label class="control-label" for="phone">{{form.phone.label}}:</label>
+            {{ form.phone(maxlength = 20, class = "form-control") }}
+            {% for error in form.errors.phone %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.address %} has-error{% endif %}">
+            <label class="control-label" for="address">{{form.address.label}}:</label>
+            {{ form.address(maxlength = 100, class = "form-control") }}
+            {% for error in form.errors.address %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.zipcode %} has-error{% endif %}">
+            <label class="control-label" for="zipcode">{{form.zipcode.label}}:</label>
+            {{ form.zipcode(maxlength = 4, class = "form-control") }}
+            {% for error in form.errors.zipcode %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.city %} has-error{% endif %}">
+            <label class="control-label" for="city">{{form.city.label}}:</label>
+            {{ form.city(maxlength = 30, class = "form-control") }}
+            {% for error in form.errors.city %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Save Changes</button>
+            <a href="{{ url_for('profile') }}" class="btn btn-default">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}

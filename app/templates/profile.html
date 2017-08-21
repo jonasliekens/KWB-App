@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{{url_for('index')}}">Home</a></li>
+  <li class="active">Profile</li>
+</ol>
+
+<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6">
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <img alt="" class="img-rounded img-responsive" src="{{g.user.avatar(150)}}">
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <h4>{{ g.user.first_name }} {{ g.user.last_name }}</h4>
+                <p>
+                    <i class="glyphicon glyphicon-earphone"></i> {{ g.user.phone }}
+                    <br>
+                    <i class="glyphicon glyphicon-envelope"></i> {{ g.user.email }}
+                    <br>
+                    <i class="glyphicon glyphicon-home"></i> {{ g.user.address }}, {{ g.user.zipcode }}, {{ g.user.city }}</p>
+                <p>
+                    <a href="{{ url_for('edit_profile') }}">Edit profile</a> | <a href="{{ url_for('change_password') }}">Change password</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,51 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+{{ pagedown.include_pagedown() }}
+
+<ol class="breadcrumb">
+    <li><a href="{{url_for('index')}}">Home</a></li>
+    <li><a href="{{url_for('profile')}}">Profile</a></li>
+    <li class="active">New</li>
+</ol>
+
+<div class="well">
+
+    <form action="" method="post" name="edit_post">
+        {{form.hidden_tag()}}
+
+        <div class="form-group{% if form.errors.title %} has-error{% endif %}">
+            <label class="control-label" for="title">{{form.title.label}}:</label>
+            {{ form.title(maxlength = 30, class = "form-control") }}
+            {% for error in form.errors.title %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.body %} has-error{% endif %}">
+            <label class="control-label" for="body">{{form.body.label}}: (<a
+                    href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown
+                Cheatsheet</a>)</label>
+            {{ form.body(only_input=True, rows=10, class = "form-control") }}
+            {% for error in form.errors.body %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{ form.body(only_preview=True, class = "form-control") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Save Changes</button>
+            <a href="{{ url_for('blog') }}" class="btn btn-default">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}

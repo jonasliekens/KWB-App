@@ -1,0 +1,48 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{{url_for('index')}}">Home</a></li>
+  <li><a href="{{url_for('users')}}">Users</a></li>
+  <li class="active">Create</li>
+</ol>
+
+<div class="well">
+
+    <form action="" method="post" name="edit_profile">
+        {{form.hidden_tag()}}
+
+        <div class="form-group{% if form.errors.first_name %} has-error{% endif %}">
+            <label class="control-label" for="first_name">{{form.first_name.label}}:</label>
+            {{ form.first_name(maxlength = 64, class = "form-control") }}
+            {% for error in form.errors.first_name %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.last_name %} has-error{% endif %}">
+            <label class="control-label" for="last_name">{{form.last_name.label}}:</label>
+            {{ form.last_name(maxlength = 64, class = "form-control") }}
+            {% for error in form.errors.last_name %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.email %} has-error{% endif %}">
+            <label class="control-label" for="email">{{form.email.label}}:</label>
+            {{ form.email(maxlength = 120, class = "form-control") }}
+            {% for error in form.errors.email %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Save Changes</button>
+            <a href="{{ url_for('profile') }}" class="btn btn-default">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}

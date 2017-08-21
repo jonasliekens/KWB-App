@@ -1,0 +1,75 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+{{ pagedown.include_pagedown() }}
+
+<ol class="breadcrumb">
+    <li><a href="{{url_for('index')}}">Home</a></li>
+    <li><a href="{{url_for('events')}}">Events</a></li>
+    <li class="active">Create</li>
+</ol>
+
+<div class="well">
+
+    <form action="" method="post" name="edit_post">
+        {{form.hidden_tag()}}
+
+        <div class="form-group{% if form.errors.title %} has-error{% endif %}">
+            <label class="control-label" for="title">{{form.title.label}}:</label>
+            {{ form.title(maxlength = 60, class = "form-control") }}
+            {% for error in form.errors.title %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.start %} has-error{% endif %}">
+            <label class="control-label" for="start">{{form.start.label}}:</label>
+            {{ form.start(class = "form-control timepicker") }}
+            {% for error in form.errors.start %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.end %} has-error{% endif %}">
+            <label class="control-label" for="end">{{form.end.label}}:</label>
+            {{ form.end(class = "form-control timepicker") }}
+            {% for error in form.errors.end %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.errors.description %} has-error{% endif %}">
+            <label class="control-label" for="description">{{form.description.label}}: (<a
+                    href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown
+                Cheatsheet</a>)</label>
+            {{ form.description(only_input=True, rows=10, class = "form-control") }}
+            {% for error in form.errors.description %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{ form.description(only_preview=True, class = "form-control") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Save Changes</button>
+            <a href="{{ url_for('events') }}" class="btn btn-default">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+
+<script type="text/javascript">
+            $(function () {
+                $('.timepicker').datetimepicker({
+                    locale: 'nl'
+                });
+            });
+</script>
+{% endblock %}
