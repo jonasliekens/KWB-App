@@ -34,12 +34,12 @@ def get_events():
 
 @app.route(create_api_uri("event/<int:event_id>"), methods=['GET'])
 def get_event(event_id):
-    event = Event.query.filter(Post.id == event_id).filter(Post.end >= datetime.now()).first()
+    event = Event.query.filter(Event.id == event_id).first()
     if event is None:
         print(request.headers)
         abort(404)
     else:
-        return jsonify(map_event_dto(event))
+        return jsonify(map_event_detail_dto(event))
 
 
 @app.route(create_api_uri("post"), methods=['GET'])
@@ -117,4 +117,14 @@ def map_event_dto(event: Event):
         "title": event.title,
         "description": event.description,
         "date": event.start.strftime('%d-%m-%Y')
+    }
+
+
+def map_event_detail_dto(event: Event):
+    return {
+        "id": event.id,
+        "title": event.title,
+        "description": event.description,
+        "start": event.start.strftime('%d-%m-%Y %H:%M:%S'),
+        "end": event.start.strftime('%d-%m-%Y %H:%M:%S')
     }
