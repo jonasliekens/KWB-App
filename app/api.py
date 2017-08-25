@@ -32,6 +32,20 @@ def get_events():
     return jsonify(map_paging_dto(events, [map_event_dto(event) for event in events.items]))
 
 
+@app.route(create_api_uri("event/next"))
+def get_first_upcoming():
+    upcoming_event = Event.query.filter(Event.start >= datetime.now()).first()
+
+    if upcoming_event:
+        return jsonify(map_event_dto(upcoming_event))
+    else:
+        upcoming_event = Event()
+        upcoming_event.description = 'Er zijn geen activiteiten meer ingeplant!'
+        upcoming_event.title = 'Coming soon'
+        upcoming_event.start = datetime.now()
+        return jsonify(map_event_dto(upcoming_event))
+
+
 @app.route(create_api_uri("event/<int:event_id>"), methods=['GET'])
 def get_event(event_id):
     event = Event.query.filter(Event.id == event_id).first()
@@ -67,6 +81,20 @@ def get_post(post_id):
     if post is None:
         abort(404)
     else:
+        return jsonify(map_post_dto(post))
+
+
+@app.route(create_api_uri("post/latest"))
+def get_latest_post():
+    post = Post.query.order_by(Post.timestamp.desc()).first()
+
+    if post:
+        return jsonify(map_post_dto(post))
+    else:
+        post = Post()
+        post.timestamp = datetime.now()
+        post.title = 'Coming soon'
+        post.body = 'Voorlopig is er nog niets gepost!'
         return jsonify(map_post_dto(post))
 
 

@@ -33,8 +33,9 @@
                     class="glyphicon glyphicon-eye-open"></i></a>
             <a href="{{url_for('edit_event', id = event.id)}}" class="btn btn-default btn-sm"><i
                     class="glyphicon glyphicon-edit"></i></a>
-            <a href="{{url_for('delete_event', id = event.id)}}" class="btn btn-danger btn-sm"><i
-                    class="glyphicon glyphicon-remove"></i></a>
+            <a href="{{url_for('delete_event', id = event.id)}}" class="btn btn-danger btn-sm"
+               data-toggle="confirmation" data-title="Delete event?" data-btn-ok-class="btn btn-xs btn-danger">
+                <i class="glyphicon glyphicon-remove"></i></a>
         </td>
     </tr>
     {% endfor %}
