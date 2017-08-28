@@ -1,6 +1,6 @@
 from flask import g
 from flask_pagedown.fields import PageDownField
-from flask_security.utils import hash_password, verify_password
+from flask_security.utils import verify_password
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, DateTimeField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
