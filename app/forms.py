@@ -1,5 +1,6 @@
 from flask import g
 from flask_pagedown.fields import PageDownField
+from flask_security.utils import hash_password, verify_password
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, DateTimeField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
@@ -32,7 +33,7 @@ class ChangePasswordForm(FlaskForm):
     repeat_password = PasswordField('Repeat password', validators=[DataRequired(), EqualTo('new_password')])
 
     def validate_current_password(self, field):
-        if field.data != g.user.password:
+        if not verify_password(field.data, g.user.password):
             raise ValidationError('Invalid password!')
 
 
