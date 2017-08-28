@@ -26,7 +26,7 @@
 
         <div class="form-group{% if form.errors.body %} has-error{% endif %}">
             <label class="control-label" for="body">{{form.body.label}}: (<a
-                    href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown
+                    href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown
                 Cheatsheet</a>)</label>
             {{ form.body(only_input=True, rows=10, class = "form-control") }}
             {% for error in form.errors.body %}
