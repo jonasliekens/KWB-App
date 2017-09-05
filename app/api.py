@@ -154,5 +154,5 @@ def map_event_detail_dto(event: Event):
         "title": event.title,
         "description": event.description,
         "start": event.start.strftime('%d-%m-%Y %H:%M:%S'),
-        "end": event.start.strftime('%d-%m-%Y %H:%M:%S')
+        "end": event.end.strftime('%d-%m-%Y %H:%M:%S')
     }
