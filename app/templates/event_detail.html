@@ -8,16 +8,28 @@
     <li class="active">Preview</li>
 </ol>
 
+<h1>{{event.title}}</h1>
+
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="col-xs-4"><h2 class="panel-title">{{event.title}}</h2></div>
-        <div class="clearfix"></div>
-    </div>
     <div class="panel-body">{{event.description|markdown}}</div>
-    <div class="panel-footer">
-        <div class="col-xs-4"><strong>Starts:</strong> {{event.start}}</div>
-        <div class="col-xs-4 pull-right text-right"><strong>Ends:</strong> {{event.end}}</div>
-        <div class="clearfix"></div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-1" for="startsOn">Starts:</label>
+                <p id="startsOn" class="form-control-static col-sm-11">{{event.start}}</p>
+            </div>
+             <div class="form-group">
+                <label class="control-label col-sm-1" for="endsOn">End:</label>
+                <p id="endsOn" class="form-control-static col-sm-11">{{event.end}}</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1" for="location">Location:</label>
+                <p id="location" class="form-control-static col-sm-11">{{event.location}}</p>
+            </div>
+        </form>
     </div>
 </div>
 

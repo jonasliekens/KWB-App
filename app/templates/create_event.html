@@ -40,6 +40,14 @@
             {% endfor %}
         </div>
 
+        <div class="form-group{% if form.errors.location %} has-error{% endif %}">
+            <label class="control-label" for="title">{{form.location.label}}:</label>
+            {{ form.location(class = "form-control") }}
+            {% for error in form.errors.location %}
+            <span class="help-block text-danger">{{error}}</span>
+            {% endfor %}
+        </div>
+
         <div class="form-group{% if form.errors.description %} has-error{% endif %}">
             <label class="control-label" for="description">{{form.description.label}}: (<a
                     href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown

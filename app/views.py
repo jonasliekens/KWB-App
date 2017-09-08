@@ -177,6 +177,7 @@ def new_event():
     if form.validate_on_submit():
         kwb_event = Event()
         kwb_event.title = form.title.data
+        kwb_event.location = form.location.data
         kwb_event.description = form.description.data
         kwb_event.start = form.start.data
         kwb_event.end = form.end.data
@@ -206,6 +207,7 @@ def edit_event(id):
     if form.validate_on_submit():
         kwb_event.title = form.title.data
         kwb_event.description = form.description.data
+        kwb_event.location = form.location.data
         kwb_event.start = form.start.data
         kwb_event.end = form.end.data
         db.session.add(kwb_event)
@@ -214,6 +216,7 @@ def edit_event(id):
         return redirect(url_for('events'))
     else:
         form.title.data = kwb_event.title
+        form.location.data = kwb_event.location
         form.description.data = kwb_event.description
         form.start.data = kwb_event.start
         form.end.data = kwb_event.end

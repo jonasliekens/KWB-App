@@ -65,6 +65,7 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(60), unique=True)
     description = db.Column(db.Text())
+    location = db.Column(db.Text())
     start = db.Column(db.DateTime())
     end = db.Column(db.DateTime())
 

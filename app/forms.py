@@ -44,6 +44,7 @@ class EditPostForm(FlaskForm):
 
 class EditEventForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
+    location = StringField('Location', validators=[DataRequired()])
     description = PageDownField('Description', validators=[DataRequired()])
     start = DateTimeField('Starts on', validators=[DataRequired()], format='%d-%m-%Y %H:%M')
     end = DateTimeField('Ends on', validators=[DataRequired()], format='%d-%m-%Y %H:%M')
