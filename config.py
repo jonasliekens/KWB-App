@@ -3,7 +3,7 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Database
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://kwb:kwbgrasheide1234@localhost:32768/kwb'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://kwb:kwbgrasheide1234@localhost:32769/kwb'
 SQLALCHEMY_MIGRATE_REPO = os.path.join(BASE_DIR, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 

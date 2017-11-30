@@ -27,7 +27,7 @@ def get_events():
         page_nr = 1
         info("Invalid page parameter {}".format(request.args.get('page')))
 
-    events = Event.query.order_by(Event.start.desc()).paginate(page_nr, POSTS_PER_PAGE, False)
+    events = Event.query.order_by(Event.start.asc()).paginate(page_nr, POSTS_PER_PAGE, False)
 
     return jsonify(map_paging_dto(events, [map_event_dto(event) for event in events.items]))
 
