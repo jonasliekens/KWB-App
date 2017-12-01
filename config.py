@@ -21,6 +21,9 @@ SECURITY_PASSWORD_SALT = '5PNHiLXoM7oOQzOdTJO9F2KOj4WwEQrVeJv36aKzJnNfnDdTTl'
 SECURITY_EMAIL_SENDER = 'no-reply@brickbit.be'
 SECURITY_LOGIN_USER_TEMPLATE = 'login.html'
 
+# Logging
+LOG_FILE = '/tmp/kwb-app.log'
+
 # Administrator list
 ADMINS = ['jonas.liekens@brickbit.be']
 
