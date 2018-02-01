@@ -17,6 +17,7 @@ def create_api_uri(uri):
 @app.route(create_api_uri("event"), methods=['GET'])
 def get_events():
     page_nr = request.args.get('page')
+    from_date = request.args.get('fromDate')
 
     try:
         if page_nr is not None:
@@ -27,7 +28,15 @@ def get_events():
         page_nr = 1
         info("Invalid page parameter {}".format(request.args.get('page')))
 
-    events = Event.query.order_by(Event.start.asc()).paginate(page_nr, POSTS_PER_PAGE, False)
+    events = []
+
+    if from_date:
+        events = Event.query\
+            .filter(Event.start >= datetime.strptime(from_date, "%d/%m/%Y"))\
+            .order_by(Event.start.asc())\
+            .paginate(page_nr, POSTS_PER_PAGE, False)
+    else:
+        events = Event.query.order_by(Event.start.asc()).paginate(page_nr, POSTS_PER_PAGE, False)
 
     return jsonify(map_paging_dto(events, [map_event_dto(event) for event in events.items]))
 
