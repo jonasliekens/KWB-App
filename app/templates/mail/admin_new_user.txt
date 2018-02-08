@@ -4,7 +4,7 @@ An account was created for you for the KWB Admin Web Applistation. You can login
     Login: {{user.email}}
     Password: {{password}}
 
-Please don't forget to complete your user profile <a href="{{url_for('profile', _external=True)}}">here!</a>
+Please don't forget to complete your user profile <a href="{{url_for('index', _external=True)}}">here!</a>
 
 
 Regards,
