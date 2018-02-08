@@ -1,0 +1,22 @@
+[[source]]
+
+name = "pypi"
+verify_ssl = true
+url = "https://pypi.python.org/simple"
+
+
+[packages]
+
+flask = "*"
+sqlalchemy = "*"
+flask-pagedown = "*"
+flask-security = "*"
+flask-login = "*"
+flask-cors = "*"
+flask-migrate = "*"
+flask-markdown = "*"
+pymysql = "*"
+
+
+[dev-packages]
+
