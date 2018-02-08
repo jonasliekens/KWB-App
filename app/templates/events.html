@@ -44,13 +44,13 @@
 
 <ul class="pager">
     {% if events.has_prev %}
-    <li class="previous"><a href="{{ url_for('blog', page = events.prev_num, _external=True) }}">Newer
+    <li class="previous"><a href="{{ url_for('events', page = events.prev_num, _external=True) }}">Newer
         Events</a></li>
     {% else %}
     <li class="previous disabled"><a href="#">Newer Events</a></li>
     {% endif %}
     {% if events.has_next %}
-    <li class="next"><a href="{{ url_for('blog', page = events.next_num, _external=True) }}">Older Events</a>
+    <li class="next"><a href="{{ url_for('events', page = events.next_num, _external=True) }}">Older Events</a>
     </li>
     {% else %}
     <li class="next disabled"><a href="#">Older Events</a></li>
