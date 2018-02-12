@@ -2,8 +2,10 @@ from flask import g
 from flask_pagedown.fields import PageDownField
 from flask_security.utils import verify_password
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, DateTimeField
+from wtforms import StringField, PasswordField, DateTimeField, SelectMultipleField, widgets
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+
+from app import Role
 
 
 class LoginForm(FlaskForm):
@@ -15,6 +17,15 @@ class NewUserForm(FlaskForm):
     first_name = StringField('First name', validators=[DataRequired()])
     last_name = StringField('Last name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
+
+
+class EditUserForm(FlaskForm):
+    roles = SelectMultipleField(
+        'Roles',
+        choices = [(str(role.id), role.description) for role in Role.query.all()],
+        option_widget=widgets.CheckboxInput(),
+        widget=widgets.ListWidget(prefix_label=False)
+    )
 
 
 class EditProfileForm(FlaskForm):

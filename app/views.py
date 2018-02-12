@@ -3,14 +3,14 @@ import string
 from datetime import datetime
 from logging import info
 
-from flask import render_template, flash, redirect, url_for, request, g, jsonify
-from flask_login import login_user, logout_user, current_user, login_required
+from flask import render_template, flash, redirect, url_for, request, jsonify
+from flask_login import logout_user, current_user, login_required
 from flask_security import roles_required
 from flask_security.utils import hash_password
 
 from app import app, db, user_datastore
-from app.email import password_reset_notification, new_account_notification
-from app.forms import LoginForm, EditProfileForm, ChangePasswordForm, EditPostForm, EditEventForm, NewUserForm
+from app.notifications import password_reset_notification, new_account_notification
+from app.forms import *
 from app.models import User, Post, Event
 from config import POSTS_PER_PAGE
 
@@ -284,11 +284,11 @@ def create_user():
     return render_template('create_user.html', form=form)
 
 
-@app.route('/user/<int:id>', methods=['GET', 'POST'])
+@app.route('/user/<int:id>', methods=['GET'])
 @login_required
 @roles_required('admin')
-def edit_user(id):
-    return render_template('edit_user.html', user=User.query.filter_by(id=id).first())
+def view_user(id):
+    return render_template('user_detail.html', user=User.query.filter_by(id=id).first())
 
 
 @app.route('/user/<int:id>/password', methods=['GET'])
@@ -328,6 +328,25 @@ def activate_user(id):
     db.session.commit()
     flash('User activated')
     return redirect(url_for('users'))
+
+
+@app.route('/user/<int:id>/edit', methods={'GET', 'POST'})
+@login_required
+@roles_required('admin')
+def edit_user(id):
+    user = User.query.filter_by(id=id).first()
+    form = EditUserForm()
+
+    if form.validate_on_submit():
+        user.roles = Role.query.filter(Role.id.in_(form.roles.data)).all()
+        db.session.add(user)
+        db.session.commit()
+        flash('User has been edited!')
+        return redirect(url_for('users'))
+    else:
+        form.roles.data = [str(role.id) for role in user.roles]
+
+    return render_template('edit_user.html', form=form)
 
 
 @app.route('/logout')
