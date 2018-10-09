@@ -28,8 +28,6 @@ def get_events():
         page_nr = 1
         info("Invalid page parameter {}".format(request.args.get('page')))
 
-    events = []
-
     if from_date:
         events = Event.query\
             .filter(Event.start >= datetime.strptime(from_date, "%d/%m/%Y"))\
@@ -43,7 +41,7 @@ def get_events():
 
 @app.route(create_api_uri("event/next"))
 def get_first_upcoming():
-    upcoming_event = Event.query.filter(Event.start >= datetime.now()).first()
+    upcoming_event = Event.query.filter(Event.start >= datetime.now()).order_by(Event.start.asc()).first()
 
     if upcoming_event:
         return jsonify(map_event_dto(upcoming_event))
