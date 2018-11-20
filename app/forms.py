@@ -22,7 +22,7 @@ class NewUserForm(FlaskForm):
 class EditUserForm(FlaskForm):
     roles = SelectMultipleField(
         'Roles',
-        choices = [(str(role.id), role.description) for role in Role.query.all()],
+        choices=[(str(role.id), role.description) for role in Role.query.all()],
         option_widget=widgets.CheckboxInput(),
         widget=widgets.ListWidget(prefix_label=False)
     )
